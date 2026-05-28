@@ -1,10 +1,1 @@
-{
-  "functions": {
-    "checkout.js": { "runtime": "nodejs20.x" },
-    "webhook.js": { "runtime": "nodejs20.x" }
-  },
-  "routes": [
-    { "src": "/api/checkout", "dest": "/checkout.js" },
-    { "src": "/api/webhook", "dest": "/webhook.js" }
-  ]
-}
+{}
