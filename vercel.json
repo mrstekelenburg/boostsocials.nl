@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/succes.html", "destination": "/public/succes.html" },
+    { "source": "/tos.html", "destination": "/public/tos.html" },
+    { "source": "/contact.html", "destination": "/public/contact.html" },
+    { "source": "/", "destination": "/public/index.html" }
+  ]
+}
