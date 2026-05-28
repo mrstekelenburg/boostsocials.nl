@@ -2405,14 +2405,14 @@ async function fetchIG() {
 
   // Profiel gevonden
 
-  // Vul profiel in
+  // Vul profiel in — alleen gebruikersnaam, geen nep stats
   ['','2'].forEach(s => {
     const avi = document.getElementById('mProfileAvi'+s);
     const name = document.getElementById('mProfileName'+s);
     const meta = document.getElementById('mProfileMeta'+s);
     if(avi) avi.textContent = val.charAt(0).toUpperCase();
     if(name) name.textContent = '@' + val;
-    if(meta) meta.textContent = followers + ' volgers · ' + posts + ' posts';
+    if(meta) meta.textContent = '';
   });
 
   // Set confirm label based on service
@@ -2421,9 +2421,6 @@ async function fetchIG() {
     'likes': 'likes', 'views': 'views'
   }[state.service] || state.service;
   document.getElementById('mFollowerLabel').textContent = serviceLabel;
-  // Reset meta — geen nep stats tonen
-  document.getElementById('mProfileMeta').textContent = '';
-  document.getElementById('mProfileMeta2').textContent = '';
 
   // Build photo grid (only for Instagram likes/views)
   if(state.needsPhoto) {
