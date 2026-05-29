@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iI0ZGMkQ3OCIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMiIgZm9udC1mYW1pbHk9IkFyaWFsIEJsYWNrLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QjwvdGV4dD4KPC9zdmc+">
+  <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iI0ZGMkQ3OCIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMiIgZm9udC1mYW1pbHk9IkFyaWFsIEJsYWNrLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QjwvdGV4dD4KPC9zdmc+">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | BoostSocials.nl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF2D78;
+    --pink2: #FF6BA8;
+    --dark: #080810;
+    --dark2: #0f0f1a;
+    --card: #13131f;
+    --card2: #1a1a2b;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.10);
+    --text: #F2F2FF;
+    --muted: #7070A0;
+    --muted2: #9090C0;
+    --green: #00E599;
+    --font-head: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--font-body); background: var(--dark); color: var(--text); min-height: 100vh; }
+
+  nav {
+    position: sticky; top:0; z-index:100;
+    padding: 0 5%; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(8,8,16,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--pink); }
+  .nav-back { color: var(--muted2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-back:hover { color: var(--pink); }
+
+  .hero {
+    text-align: center;
+    padding: 70px 5% 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,45,120,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,45,120,0.1);
+    border: 1px solid rgba(255,45,120,0.25);
+    border-radius: 100px;
+    padding: 5px 16px;
+    font-size: 12px; font-weight: 700;
+    color: var(--pink2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 14px;
+  }
+  .hero p { font-size: 16px; color: var(--muted2); max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 5% 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* Contact options */
+  .contact-options { display: flex; flex-direction: column; gap: 14px; }
+
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-card:hover { border-color: rgba(255,45,120,0.4); transform: translateY(-2px); }
+  .contact-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .contact-icon.mail { background: rgba(255,45,120,0.12); }
+  .contact-icon.whatsapp { background: rgba(0,229,153,0.12); }
+  .contact-icon.insta { background: rgba(255,107,168,0.12); }
+  .contact-info { flex: 1; }
+  .contact-label { font-family: var(--font-head); font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+  .contact-value { font-size: 13px; color: var(--muted2); }
+  .contact-badge {
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    background: rgba(0,229,153,0.12);
+    color: var(--green);
+    border: 1px solid rgba(0,229,153,0.2);
+  }
+
+  /* FAQ quick answers */
+  .faq-quick { display: flex; flex-direction: column; gap: 12px; }
+  .faq-quick h2 {
+    font-family: var(--font-head);
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+  .faq-q { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .faq-a { font-size: 13px; color: var(--muted2); line-height: 1.6; }
+
+  /* Response time */
+  .response-box {
+    background: rgba(0,229,153,0.05);
+    border: 1px solid rgba(0,229,153,0.15);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .response-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; flex-shrink:0; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .response-text { font-size: 13px; color: var(--muted2); line-height: 1.5; }
+  .response-text strong { color: var(--green); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 5%;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: var(--pink); text-decoration: none; }
+
+  @media(max-width: 640px) {
+    .content { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Boost<span>Socials</span></a>
+  <a href="/" class="nav-back">← Terug naar home</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Klantenservice</div>
+  <h1>Hoe kunnen we je helpen?</h1>
+  <p>Heb je een vraag over je bestelling of wil je meer weten over onze diensten? We reageren snel.</p>
+</div>
+
+<div class="content">
+
+  <div class="contact-options">
+    <div class="response-box">
+      <div class="response-dot"></div>
+      <div class="response-text">Klantenservice is online. <strong>Gemiddelde reactietijd: onder 1 uur.</strong></div>
+    </div>
+
+    <a href="mailto:support@boostsocials.nl" class="contact-card">
+      <div class="contact-icon mail">📧</div>
+      <div class="contact-info">
+        <div class="contact-label">E-mail</div>
+        <div class="contact-value">support@boostsocials.nl</div>
+      </div>
+      <div class="contact-badge">Aanbevolen</div>
+    </a>
+
+    <a href="https://instagram.com/boostsocials.nl" target="_blank" class="contact-card">
+      <div class="contact-icon insta">📸</div>
+      <div class="contact-info">
+        <div class="contact-label">Instagram DM</div>
+        <div class="contact-value">@boostsocials.nl</div>
+      </div>
+    </a>
+
+    <div class="contact-card" style="cursor:default">
+      <div class="contact-icon" style="background:rgba(255,215,0,0.1)">⏰</div>
+      <div class="contact-info">
+        <div class="contact-label">Openingstijden</div>
+        <div class="contact-value">Maandag t/m zondag &nbsp;|&nbsp; 09:00 — 22:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-quick">
+    <h2>Snelle antwoorden</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Mijn bestelling is nog niet geleverd</div>
+      <div class="faq-a">De meeste bestellingen worden binnen 30 minuten verwerkt. Bij grotere pakketten kan het tot 24 uur duren. Duurt het langer? Stuur ons een mail met je bestelnummer.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Ik wil mijn geld terug</div>
+      <div class="faq-a">Geen probleem. Onze tevredenheidsgarantie geldt 30 dagen na aankoop. Stuur een mail met je bestelnummer en we lossen het direct op.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Mijn profiel moet openbaar zijn?</div>
+      <div class="faq-a">Ja, tijdens de levering moet je profiel openbaar zijn. Daarna kun je hem weer op privé zetten.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Heb je mijn wachtwoord nodig?</div>
+      <div class="faq-a">Nee, nooit. Alleen je gebruikersnaam is voldoende. Geef nooit je wachtwoord aan iemand.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Ik heb een andere vraag</div>
+      <div class="faq-a">Stuur ons een mail via <a href="mailto:support@boostsocials.nl" style="color:var(--pink)">support@boostsocials.nl</a>. We reageren binnen 1 uur.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 BoostSocials.nl &nbsp;|&nbsp; <a href="/tos.html">Voorwaarden</a> &nbsp;|&nbsp; <a href="/tos.html#privacy">Privacy</a></p>
+</footer>
+
+
+<script src="https://beta.leadconnectorhq.com/loader.js" data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="681ad6ffbd14c522e7dd3d12"></script>
+</body>
+</html>
