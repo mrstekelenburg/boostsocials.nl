@@ -2,6 +2,27 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18194952385"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18194952385');
+
+  // Conversie-event: pagina geladen = betaling ontvangen via Stripe redirect
+  window.addEventListener('load', function() {
+    // Haal orderwaarde op uit URL-parameter ?value=9.99 (optioneel, meegestuurde door Stripe)
+    const params = new URLSearchParams(window.location.search);
+    const value = parseFloat(params.get('value')) || 0;
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18194952385',
+      'value': value || undefined,
+      'currency': 'EUR',
+      'transaction_id': params.get('order') || ('BS-' + Date.now())
+    });
+  });
+</script>
 <meta name="description" content="Je bestelling is succesvol geplaatst. We zijn direct aan de slag met de levering.">
 <meta name="keywords" content="boostsocials bestelling bevestigd">
 <meta name="robots" content="index, follow">
