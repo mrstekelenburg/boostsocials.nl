@@ -2,6 +2,14 @@
 <html lang="nl" id="html-root">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18194952385"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18194952385');
+</script>
 <meta name="description" content="Boost jouw social media met echte volgers, likes en weergaven. Instagram, TikTok, Facebook en YouTube. Veilig, snel en betaalbaar. Vanaf €1,99.">
 <meta name="keywords" content="social media boost, instagram volgers kopen, tiktok likes, youtube weergaven, facebook bereik, social media groei nederland">
 <meta name="robots" content="index, follow">
@@ -1466,7 +1474,18 @@ function setModalStep(n) {
   if (n===1) document.getElementById('mStep1').classList.add('active');
   else if (n===2) { if (state.needsPhoto) document.getElementById('mStep2').classList.add('active'); else document.getElementById('mStep2b').classList.add('active'); }
   else if (n===3) { document.getElementById('mStep3').classList.add('active'); fillSummary(); }
-  else if (n===4) document.getElementById('mStep4').classList.add('active');
+  else if (n===4) {
+    document.getElementById('mStep4').classList.add('active');
+    // Google Ads conversie-event
+    if (typeof gtag === 'function' && state.product) {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18194952385',
+        'value': state.product.price,
+        'currency': 'EUR',
+        'transaction_id': 'BS-' + Date.now()
+      });
+    }
+  }
   state.step = n;
 }
 function goStep(n) { setModalStep(n); }
