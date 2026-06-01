@@ -348,19 +348,6 @@ section { padding: 80px 5%; }
 .trust-card .tc-title { font-family: var(--font-head); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
 .trust-card .tc-desc { font-size: 13px; color: var(--muted2); line-height: 1.6; }
 
-/* ---- SOCIAL PROOF COUNTER ---- */
-.social-proof-strip {
-  padding: 12px 0;
-  background: var(--dark2);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-}
-.sp-scroll { display: flex; gap: 56px; width: max-content; animation: ticker 70s linear infinite; align-items: center; }
-.sp-item { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-.sp-avi { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,45,120,0.2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: var(--pink2); font-family: var(--font-head); flex-shrink: 0; }
-.sp-text { font-size: 11px; color: var(--muted); }
-.sp-text strong { color: var(--muted2); font-weight: 600; }
 
 /* ---- REVIEWS ---- */
 #reviews { background: var(--dark); overflow: hidden; }
@@ -425,10 +412,6 @@ footer { background: var(--dark2); border-top: 1px solid var(--border); padding:
 .cart-btn:hover { transform: scale(1.1); }
 .cart-count { position: absolute; top: -4px; right: -4px; background: var(--yellow); color: #000; font-size: 11px; font-weight: 800; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); }
 
-/* ---- LOGOS ---- */
-.logos-strip { padding: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; background: var(--dark2); }
-.logos-inner { display: flex; gap: 56px; width: max-content; animation: ticker 45s linear infinite; align-items: center; }
-.logo-item { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: 8px; }
 .logo-item span { font-size: 20px; }
 
 /* ---- REVEAL ---- */
@@ -617,9 +600,6 @@ footer { background: var(--dark2); border-top: 1px solid var(--border); padding:
   </div>
 </section>
 
-<!-- Logo marquee -->
-<div class="logos-strip">
-  <div class="logos-inner" id="logoMarquee"></div>
 </div>
 
 <!-- ======= COUNTDOWN BANNER ======= -->
@@ -637,11 +617,6 @@ footer { background: var(--dark2); border-top: 1px solid var(--border); padding:
     </div>
     <a href="#platforms" class="countdown-cta" data-nl="Profiteer nu →" data-en="Grab it now →">Profiteer nu →</a>
   </div>
-</div>
-
-<!-- ======= SOCIAL PROOF SCROLL ======= -->
-<div class="social-proof-strip">
-  <div class="sp-scroll" id="spScroll"></div>
 </div>
 
 <!-- ======= PLATFORMS & PRICING ======= -->
@@ -1093,7 +1068,6 @@ function toggleLang() {
   renderAll();
   renderReviews();
   renderFAQ();
-  renderMarquee();
 }
 
 function applyLang() {
@@ -1717,38 +1691,6 @@ setTimeout(() => { showNotif(); setInterval(showNotif, 11000); }, 2500);
 // =====================================================
 // SOCIAL PROOF SCROLL
 // =====================================================
-function renderSocialProof() {
-  const items_nl = [
-    { name:'Joep', city:'Amsterdam', action:'bestelde 1.000 Instagram volgers', color:'#e054a0', time:'2 min geleden' },
-    { name:'Lena', city:'Rotterdam', action:'kocht 500 TikTok likes', color:'#6054e0', time:'5 min geleden' },
-    { name:'Bram', city:'Utrecht', action:'activeerde 2.000 YouTube weergaven', color:'#54b0e0', time:'8 min geleden' },
-    { name:'Sara', city:'Breda', action:'bestelde 500 Facebook volgers', color:'#54e090', time:'11 min geleden' },
-    { name:'Milan', city:'Eindhoven', action:'kocht 200 Instagram likes', color:'#e07054', time:'14 min geleden' },
-    { name:'Hanne', city:'Gent', action:'startte een Instagram pakket', color:'#a054e0', time:'18 min geleden' },
-    { name:'Ruben', city:'Den Haag', action:'bestelde 5.000 TikTok weergaven', color:'#e0a054', time:'21 min geleden' },
-    { name:'Emma', city:'Haarlem', action:'kocht 1.000 YouTube abonnees', color:'#54e0d0', time:'25 min geleden' },
-  ];
-  const items_en = [
-    { name:'James', city:'London', action:'ordered 1,000 Instagram followers', color:'#e054a0', time:'2 min ago' },
-    { name:'Emma', city:'Manchester', action:'bought 500 TikTok likes', color:'#6054e0', time:'5 min ago' },
-    { name:'Oliver', city:'Birmingham', action:'activated 2,000 YouTube views', color:'#54b0e0', time:'8 min ago' },
-    { name:'Olivia', city:'Leeds', action:'ordered 500 Facebook followers', color:'#54e090', time:'11 min ago' },
-    { name:'Harry', city:'Bristol', action:'bought 200 Instagram likes', color:'#e07054', time:'14 min ago' },
-    { name:'Sophia', city:'Glasgow', action:'started an Instagram package', color:'#a054e0', time:'18 min ago' },
-    { name:'Jack', city:'Edinburgh', action:'ordered 5,000 TikTok views', color:'#e0a054', time:'21 min ago' },
-    { name:'Alice', city:'Liverpool', action:'bought 1,000 YouTube subscribers', color:'#54e0d0', time:'25 min ago' },
-  ];
-  const items = currentLang === 'nl' ? items_nl : items_en;
-  const doubled = [...items, ...items, ...items];
-  const html = doubled.map(i => `
-    <div class="sp-item">
-      <div class="sp-avi" style="background:linear-gradient(135deg,${i.color},${i.color}88)">${i.name.charAt(0)}</div>
-      <div class="sp-text"><strong>${i.name} ${currentLang==='nl'?'uit':'from'} ${i.city}</strong> ${i.action} — ${i.time}</div>
-    </div>
-  `).join('');
-  document.getElementById('spScroll').innerHTML = html;
-}
-
 // =====================================================
 // SCROLL ANIMATIONS
 // =====================================================
@@ -1808,27 +1750,6 @@ const SVG_LOGOS = {
   youtube: `<svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#FF0000"/><path d="M21.5 7.4s-.2-1.4-.8-2c-.77-.8-1.63-.81-2.02-.86C15.75 4.36 12 4.36 12 4.36s-3.75 0-6.68.18c-.39.05-1.25.06-2.02.86-.6.6-.8 2-.8 2S2.27 9 2.27 10.6v1.5c0 1.6.23 3.2.23 3.2s.2 1.4.8 2c.77.8 1.8.77 2.25.86C7.04 18.39 12 18.45 12 18.45s3.75 0 6.68-.2c.39-.05 1.25-.06 2.02-.86.6-.6.8-2 .8-2s.23-1.6.23-3.2v-1.5C21.73 9 21.5 7.4 21.5 7.4zM9.73 14.59V8.96l5.45 2.82-5.45 2.81z" fill="white"/></svg>`,
 };
 
-function renderMarquee() {
-  const items_nl = [
-    { svg:SVG_LOGOS.instagram, label:'Instagram' }, { svg:SVG_LOGOS.tiktok, label:'TikTok' },
-    { svg:SVG_LOGOS.facebook, label:'Facebook' }, { svg:SVG_LOGOS.youtube, label:'YouTube' },
-    { svg:'', label:'⭐ 4.9/5 beoordeling' }, { svg:'', label:'🔒 Veilig & Betrouwbaar' },
-    { svg:'', label:'⚡ Direct geleverd' }, { svg:'', label:'🇳🇱 Nederlandse service' },
-    { svg:'', label:'✅ 30d garantie' }, { svg:'', label:'💳 iDEAL & Bancontact' },
-  ];
-  const items_en = [
-    { svg:SVG_LOGOS.instagram, label:'Instagram' }, { svg:SVG_LOGOS.tiktok, label:'TikTok' },
-    { svg:SVG_LOGOS.facebook, label:'Facebook' }, { svg:SVG_LOGOS.youtube, label:'YouTube' },
-    { svg:'', label:'⭐ 4.9/5 rating' }, { svg:'', label:'🔒 Safe & Reliable' },
-    { svg:'', label:'⚡ Instant delivery' }, { svg:'', label:'🇬🇧 English support' },
-    { svg:'', label:'✅ 30d guarantee' }, { svg:'', label:'💳 All major cards' },
-  ];
-  const items = currentLang === 'nl' ? items_nl : items_en;
-  const doubled = [...items, ...items];
-  const html = doubled.map(i => `<div class="logo-item">${i.svg} ${i.label}</div>`).join('');
-  document.getElementById('logoMarquee').innerHTML = html;
-}
-
 // =====================================================
 // INIT
 // =====================================================
@@ -1836,8 +1757,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAll();
   renderReviews();
   renderFAQ();
-  renderMarquee();
-  renderSocialProof();
   initReveal();
   applyLang();
 });
