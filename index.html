@@ -450,6 +450,72 @@ footer { background: var(--dark2); border-top: 1px solid var(--border); padding:
   .modal-header { padding: 20px 20px 0; }
   .urgency-bar { font-size: 11px; }
 }
+
+/* =====================================================
+   EMAIL CAPTURE POPUP
+   ===================================================== */
+.email-popup-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  z-index: 3000; align-items: center; justify-content: center; padding: 20px;
+  backdrop-filter: blur(6px);
+}
+.email-popup-overlay.open { display: flex; }
+.email-popup {
+  background: var(--card); border: 1px solid rgba(255,45,120,0.25);
+  border-radius: 24px; width: 100%; max-width: 440px; padding: 36px 32px;
+  position: relative; text-align: center;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 60px rgba(255,45,120,0.08);
+}
+.email-popup::before { content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 2px; background: linear-gradient(90deg, transparent, var(--pink), transparent); border-radius: 2px; }
+.email-popup-close { position: absolute; top: 14px; right: 16px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border2); background: var(--card2); color: var(--muted2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.email-popup-close:hover { border-color: var(--pink); color: var(--pink); }
+.email-popup-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.25); border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 700; color: var(--pink2); margin-bottom: 16px; }
+.email-popup h3 { font-family: var(--font-head); font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.15; }
+.email-popup h3 .hl { background: linear-gradient(135deg, var(--pink), var(--pink2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.email-popup p { font-size: 14px; color: var(--muted2); margin-bottom: 24px; line-height: 1.6; }
+.email-inp-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.email-inp { width: 100%; background: var(--card2); border: 1.5px solid var(--border2); border-radius: 12px; padding: 14px 16px; color: var(--text); font-size: 15px; font-family: var(--font-body); outline: none; transition: border-color 0.2s; }
+.email-inp:focus { border-color: var(--pink); }
+.email-inp::placeholder { color: var(--muted); }
+.email-popup-skip { font-size: 12px; color: var(--muted); cursor: pointer; margin-top: 12px; display: block; transition: color 0.2s; text-decoration: underline; }
+.email-popup-skip:hover { color: var(--muted2); }
+.email-popup-success { display: none; text-align: center; padding: 12px 0; }
+.email-popup-success .check { font-size: 48px; margin-bottom: 12px; display: block; }
+.email-popup-success h4 { font-family: var(--font-head); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.email-popup-success p { font-size: 14px; color: var(--muted2); }
+.email-popup-coupon { background: rgba(0,229,153,0.08); border: 1.5px dashed rgba(0,229,153,0.4); border-radius: 12px; padding: 12px 16px; font-family: var(--font-head); font-size: 20px; font-weight: 900; letter-spacing: 3px; color: var(--green); margin: 14px 0; }
+.ep-trust { display: flex; justify-content: center; gap: 16px; margin-top: 14px; }
+.ep-trust span { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+
+/* =====================================================
+   UPSELL MODAL
+   ===================================================== */
+.upsell-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2500; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(8px); }
+.upsell-overlay.open { display: flex; }
+.upsell-box { background: var(--card); border: 1px solid var(--border2); border-radius: 24px; width: 100%; max-width: 480px; padding: 32px 28px; position: relative; text-align: center; }
+.upsell-box::before { content: ''; position: absolute; top: -1px; left: 15%; right: 15%; height: 2px; background: linear-gradient(90deg, transparent, var(--pink), transparent); }
+.upsell-close { position: absolute; top: 14px; right: 16px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border2); background: var(--card2); color: var(--muted2); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.upsell-close:hover { border-color: var(--pink); color: var(--pink); }
+.upsell-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,213,0,0.1); border: 1px solid rgba(255,213,0,0.3); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 800; color: var(--yellow); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+.upsell-box h3 { font-family: var(--font-head); font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.2; }
+.upsell-box > p { font-size: 14px; color: var(--muted2); margin-bottom: 20px; line-height: 1.6; }
+.upsell-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.upsell-card { display: flex; align-items: center; gap: 14px; background: var(--card2); border: 1.5px solid var(--border2); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: all 0.2s; text-align: left; }
+.upsell-card:hover { border-color: var(--pink); transform: translateX(2px); }
+.upsell-card.selected { border-color: var(--pink); background: rgba(255,45,120,0.06); }
+.upsell-card-icon { font-size: 28px; flex-shrink: 0; }
+.upsell-card-info { flex: 1; }
+.upsell-card-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.upsell-card-sub { font-size: 12px; color: var(--muted2); }
+.upsell-card-price { text-align: right; flex-shrink: 0; }
+.upsell-card-price .up { font-family: var(--font-head); font-size: 18px; font-weight: 800; color: var(--pink); display: block; }
+.upsell-card-price .orig { font-size: 11px; color: var(--muted); text-decoration: line-through; }
+.upsell-card-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; transition: all 0.2s; }
+.upsell-card.selected .upsell-card-check { background: var(--pink); border-color: var(--pink); color: white; }
+.upsell-skip { font-size: 12px; color: var(--muted); cursor: pointer; text-decoration: underline; display: block; margin-top: 10px; transition: color 0.2s; }
+.upsell-skip:hover { color: var(--muted2); }
+.upsell-timer { font-size: 12px; color: var(--muted2); margin-bottom: 16px; }
+.upsell-timer strong { color: var(--pink); }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"BoostSocials","url":"https://www.boostsocials.nl","description":"Social media groeidiensten voor Instagram, TikTok, Facebook en YouTube.","areaServed":"NL"}
@@ -1725,6 +1791,305 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<script src="https://beta.leadconnectorhq.com/loader.js" data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="681ad6ffbd14c522e7dd3d12"></script>
+<script src="https://beta.leadconnectorhq.com/loader.js" data-resources-url="https://beta.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="681ad6ffbd14c522e7dd3d12">
+// =====================================================
+// EMAIL CAPTURE POPUP
+// =====================================================
+const EMAIL_SHOWN_KEY = 'bs_email_shown';
+let emailPopupTimer = null;
+
+function shouldShowEmailPopup() {
+  return !sessionStorage.getItem(EMAIL_SHOWN_KEY);
+}
+
+function showEmailPopup() {
+  if (!shouldShowEmailPopup()) return;
+  sessionStorage.setItem(EMAIL_SHOWN_KEY, '1');
+  applyEmailPopupLang();
+  document.getElementById('emailPopupOverlay').classList.add('open');
+}
+
+function applyEmailPopupLang() {
+  const isEN = currentLang === 'en';
+  document.getElementById('epBadge').textContent = isEN ? '🎁 Exclusive offer' : '🎁 Exclusief aanbod';
+  document.getElementById('epTitle').innerHTML = isEN
+    ? 'Get <span class="hl">10% discount</span> on your first order'
+    : 'Ontvang <span class="hl">10% korting</span> op je eerste bestelling';
+  document.getElementById('epSubtitle').textContent = isEN
+    ? 'Enter your email and receive a discount code instantly. No spam, unsubscribe anytime.'
+    : 'Vul je e-mailadres in en ontvang direct een kortingscode. Geen spam, uitschrijven kan altijd.';
+  document.getElementById('emailInput').placeholder = isEN ? 'your@email.com' : 'jouw@email.nl';
+  document.getElementById('epSubmitTxt').textContent = isEN ? 'Send me the discount code →' : 'Stuur mij de kortingscode →';
+  document.getElementById('epSkip').textContent = isEN ? 'No thanks, I prefer to pay full price' : 'Nee bedankt, ik betaal liever de volle prijs';
+  document.getElementById('epSuccessTitle').textContent = isEN ? 'Your discount code:' : 'Jouw kortingscode:';
+  document.getElementById('epSuccessMsg').textContent = isEN
+    ? 'Use this code at checkout. Valid for 24 hours.'
+    : 'Gebruik deze code bij je bestelling. De code is 24 uur geldig.';
+  document.getElementById('epGoShop').textContent = isEN ? 'View discounted packages ⚡' : 'Bekijk pakketten met korting ⚡';
+}
+
+function closeEmailPopup() {
+  document.getElementById('emailPopupOverlay').classList.remove('open');
+}
+function closeEmailPopupOutside(e) {
+  if (e.target === document.getElementById('emailPopupOverlay')) closeEmailPopup();
+}
+function closeEmailAndGoShop() {
+  closeEmailPopup();
+  document.getElementById('platforms').scrollIntoView({ behavior: 'smooth' });
+}
+
+function submitEmailPopup() {
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('emailInput').style.borderColor = '#ff5555';
+    setTimeout(() => { document.getElementById('emailInput').style.borderColor = ''; }, 1500);
+    return;
+  }
+  const btn = document.getElementById('epSubmitBtn');
+  btn.disabled = true;
+  document.getElementById('epSubmitTxt').textContent = currentLang === 'en' ? 'Sending...' : 'Versturen...';
+  // In productie: POST naar je e-maillijst (Klaviyo, Mailchimp, GHL etc.)
+  // fetch('/api/subscribe', { method:'POST', body: JSON.stringify({ email }) })
+  setTimeout(() => {
+    document.getElementById('emailPopupForm').style.display = 'none';
+    document.getElementById('emailPopupSuccess').style.display = 'block';
+  }, 800);
+}
+
+// Trigger: 35 seconds on page, OR exit intent on desktop
+setTimeout(() => {
+  if (shouldShowEmailPopup()) showEmailPopup();
+}, 35000);
+
+// Exit intent (mouse leaves viewport upwards)
+document.addEventListener('mouseleave', (e) => {
+  if (e.clientY < 10 && shouldShowEmailPopup()) {
+    showEmailPopup();
+  }
+});
+
+// =====================================================
+// UPSELL MODAL
+// =====================================================
+const UPSELL_MAP = {
+  // instagram volgers → suggest likes
+  instagram_volgers: [
+    { icon:'❤️', title_nl:'500 Instagram likes',       title_en:'500 Instagram likes',       sub_nl:'Boost ook je interactie — klanten zien dit direct', sub_en:'Boost your engagement too — customers notice immediately', price:4.99, orig:7.49, id:'ig-l-500' },
+    { icon:'👁️', title_nl:'2.000 Instagram weergaven', title_en:'2,000 Instagram views',      sub_nl:'Meer bereik op je laatste post',                    sub_en:'More reach on your latest post',                          price:5.99, orig:8.99, id:'ig-vw-2000' },
+  ],
+  instagram_likes: [
+    { icon:'👤', title_nl:'500 Instagram volgers',     title_en:'500 Instagram followers',   sub_nl:'Meer volgers maakt je profiel geloofwaardiger',     sub_en:'More followers makes your profile more credible',         price:6.99, orig:9.99, id:'ig-v-500' },
+    { icon:'👁️', title_nl:'1.000 Instagram weergaven', title_en:'1,000 Instagram views',     sub_nl:'Verhoog het bereik van je post nog verder',          sub_en:'Increase the reach of your post even further',            price:3.99, orig:5.49, id:'ig-vw-1000' },
+  ],
+  instagram_views: [
+    { icon:'❤️', title_nl:'500 Instagram likes',       title_en:'500 Instagram likes',       sub_nl:'Likes + views = maximale geloofwaardigheid',        sub_en:'Likes + views = maximum credibility',                     price:4.99, orig:7.49, id:'ig-l-500' },
+    { icon:'👤', title_nl:'500 Instagram volgers',     title_en:'500 Instagram followers',   sub_nl:'Laat ook je volgersaantal groeien',                 sub_en:'Grow your follower count too',                            price:6.99, orig:9.99, id:'ig-v-500' },
+  ],
+  tiktok_volgers: [
+    { icon:'❤️', title_nl:'500 TikTok likes',          title_en:'500 TikTok likes',          sub_nl:'Boost je interactie direct mee',                    sub_en:'Boost your engagement at the same time',                  price:3.99, orig:5.99, id:'tt-l-500' },
+    { icon:'👁️', title_nl:'5.000 TikTok weergaven',    title_en:'5,000 TikTok views',        sub_nl:'Meer views = hoger in het TikTok algoritme',        sub_en:'More views = higher in the TikTok algorithm',             price:4.99, orig:7.49, id:'tt-vw-5000' },
+  ],
+  tiktok_likes: [
+    { icon:'👤', title_nl:'500 TikTok volgers',        title_en:'500 TikTok followers',      sub_nl:'Meer volgers = meer vertrouwen',                    sub_en:'More followers = more trust',                             price:6.99, orig:9.99, id:'tt-v-500' },
+    { icon:'👁️', title_nl:'5.000 TikTok weergaven',    title_en:'5,000 TikTok views',        sub_nl:'Laat je video viral gaan',                          sub_en:'Make your video go viral',                                price:4.99, orig:7.49, id:'tt-vw-5000' },
+  ],
+  tiktok_views: [
+    { icon:'❤️', title_nl:'500 TikTok likes',          title_en:'500 TikTok likes',          sub_nl:'Likes maken je video geloofwaardiger',              sub_en:'Likes make your video more credible',                     price:3.99, orig:5.99, id:'tt-l-500' },
+    { icon:'👤', title_nl:'500 TikTok volgers',        title_en:'500 TikTok followers',      sub_nl:'Combineer views met volgersgroei',                  sub_en:'Combine views with follower growth',                      price:6.99, orig:9.99, id:'tt-v-500' },
+  ],
+  facebook_volgers: [
+    { icon:'❤️', title_nl:'500 Facebook likes',        title_en:'500 Facebook likes',        sub_nl:'Verhoog je pagina-interactie',                      sub_en:'Increase your page interaction',                          price:6.99, orig:9.99, id:'fb-l-500' },
+  ],
+  facebook_likes: [
+    { icon:'👤', title_nl:'500 Facebook volgers',      title_en:'500 Facebook followers',    sub_nl:'Meer volgers = meer vertrouwen',                    sub_en:'More followers = more trust',                             price:9.99, orig:14.99, id:'fb-v-500' },
+  ],
+  facebook_views: [
+    { icon:'❤️', title_nl:'500 Facebook likes',        title_en:'500 Facebook likes',        sub_nl:'Boost je video met extra likes',                    sub_en:'Boost your video with extra likes',                       price:6.99, orig:9.99, id:'fb-l-500' },
+  ],
+  youtube_abonnees: [
+    { icon:'❤️', title_nl:'500 YouTube likes',         title_en:'500 YouTube likes',         sub_nl:'Likes verhogen je video ranking',                   sub_en:'Likes boost your video ranking',                          price:8.99, orig:12.99, id:'yt-l-500' },
+    { icon:'👁️', title_nl:'5.000 YouTube weergaven',   title_en:'5,000 YouTube views',       sub_nl:'Meer views = hogere YouTube positie',               sub_en:'More views = higher YouTube ranking',                     price:11.99, orig:17.99, id:'yt-vw-5000' },
+  ],
+  youtube_likes: [
+    { icon:'👁️', title_nl:'5.000 YouTube weergaven',   title_en:'5,000 YouTube views',       sub_nl:'Gecombineerd = maximale impact',                    sub_en:'Combined = maximum impact',                               price:11.99, orig:17.99, id:'yt-vw-5000' },
+  ],
+  youtube_views: [
+    { icon:'❤️', title_nl:'500 YouTube likes',         title_en:'500 YouTube likes',         sub_nl:'Likes + views = perfecte combinatie',               sub_en:'Likes + views = perfect combination',                     price:8.99, orig:12.99, id:'yt-l-500' },
+    { icon:'👤', title_nl:'500 YouTube abonnees',      title_en:'500 YouTube subscribers',   sub_nl:'Laat ook je kanaal groeien',                        sub_en:'Grow your channel too',                                   price:24.99, orig:34.99, id:'yt-a-500' },
+  ],
+};
+
+let selectedUpsell = null;
+let upsellCountdown = null;
+
+function openUpsell() {
+  const key = state.platform + '_' + state.service;
+  const offers = UPSELL_MAP[key] || UPSELL_MAP['instagram_volgers'];
+  selectedUpsell = null;
+
+  // Render cards
+  const isEN = currentLang === 'en';
+  const cards = document.getElementById('upsellCards');
+  cards.innerHTML = offers.map((o, i) => `
+    <div class="upsell-card" id="uc${i}" onclick="selectUpsell(${i})">
+      <div class="upsell-card-icon">${o.icon}</div>
+      <div class="upsell-card-info">
+        <div class="upsell-card-title">${isEN ? o.title_en : o.title_nl}</div>
+        <div class="upsell-card-sub">${isEN ? o.sub_en : o.sub_nl}</div>
+      </div>
+      <div class="upsell-card-price">
+        <span class="up">€${o.price.toFixed(2).replace('.',',')}</span>
+        <span class="orig">€${o.orig.toFixed(2).replace('.',',')}</span>
+      </div>
+      <div class="upsell-card-check" id="ucc${i}"></div>
+    </div>
+  `).join('');
+
+  // Texts
+  document.getElementById('upsellTitle').textContent = isEN
+    ? 'Customers who bought this also added:'
+    : 'Klanten die dit kochten, voegden ook toe:';
+  document.getElementById('upsellSub').textContent = isEN
+    ? 'Combine your package for maximum results. Special price — only available right now.'
+    : 'Combineer je pakket voor maximaal resultaat. Speciale prijs — alleen nu direct na bestelling.';
+  document.getElementById('upsellSkipTxt').textContent = isEN
+    ? 'No thanks, I'll continue without extra boost'
+    : 'Nee bedankt, ik ga zonder extra boost verder';
+
+  // Start upsell countdown (10 min)
+  let upsellSecs = 599;
+  clearInterval(upsellCountdown);
+  upsellCountdown = setInterval(() => {
+    upsellSecs = Math.max(0, upsellSecs - 1);
+    const m = Math.floor(upsellSecs / 60);
+    const s = upsellSecs % 60;
+    const el = document.getElementById('upsellTimer');
+    if (el) el.textContent = pad(m) + ':' + pad(s);
+    if (upsellSecs === 0) { clearInterval(upsellCountdown); closeUpsell(); }
+  }, 1000);
+
+  document.getElementById('upsellOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function selectUpsell(i) {
+  const key = state.platform + '_' + state.service;
+  const offers = UPSELL_MAP[key] || UPSELL_MAP['instagram_volgers'];
+  selectedUpsell = offers[i];
+
+  document.querySelectorAll('.upsell-card').forEach((el, j) => {
+    el.classList.toggle('selected', j === i);
+    document.getElementById('ucc'+j).textContent = j === i ? '✓' : '';
+  });
+
+  const isEN = currentLang === 'en';
+  const btn = document.getElementById('upsellAddBtn');
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'auto';
+  document.getElementById('upsellAddTxt').textContent = isEN
+    ? `Add ${selectedUpsell.title_en} for €${selectedUpsell.price.toFixed(2).replace('.',',')} →`
+    : `${selectedUpsell.title_nl} toevoegen voor €${selectedUpsell.price.toFixed(2).replace('.',',')} →`;
+}
+
+function addUpsell() {
+  if (!selectedUpsell) return;
+  clearInterval(upsellCountdown);
+  document.getElementById('upsellOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  // In productie: open checkout met beide producten, of redirect naar upsell Stripe link
+  const link = STRIPE_LINKS[selectedUpsell.id];
+  if (link) {
+    window.location.href = link + '?username=' + encodeURIComponent(state.username) + '&upsell=1';
+  }
+}
+
+function closeUpsell() {
+  clearInterval(upsellCountdown);
+  document.getElementById('upsellOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Hook into goStripe: show upsell BEFORE redirecting to Stripe
+// Override goStripe to intercept and show upsell first
+const _origGoStripe = goStripe;
+window._goStripeAfterUpsell = _origGoStripe;
+// We patch fillSummary to also wire the upsell into the pay button behaviour
+// The upsell opens when user clicks pay, before actual redirect
+const _origGoStripeBtn = document.getElementById('mStripeBtn');
+
+// Actually we hook setModalStep to show upsell at step 4 (after success/payment redirect)
+// But since Stripe redirect is external, we show upsell BEFORE the Stripe redirect instead
+async function goStripe() {
+  // Show upsell first, then on addUpsell or closeUpsell → proceed to Stripe
+  openUpsell();
+
+  // Wire buttons to proceed after upsell decision
+  document.getElementById('upsellAddBtn').addEventListener('click', function handler() {
+    this.removeEventListener('click', handler);
+  }, { once: true });
+}
+
+// When user skips upsell, proceed to actual Stripe
+const _closeUpsellOrig = closeUpsell;
+closeUpsell = function() {
+  clearInterval(upsellCountdown);
+  document.getElementById('upsellOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  // Proceed with original Stripe redirect
+  _goStripeAfterUpsell();
+};
+
+</script>
+
+<!-- ======= EMAIL CAPTURE POPUP ======= -->
+<div class="email-popup-overlay" id="emailPopupOverlay" onclick="closeEmailPopupOutside(event)">
+  <div class="email-popup" id="emailPopupBox">
+    <button class="email-popup-close" onclick="closeEmailPopup()">×</button>
+    <div id="emailPopupForm">
+      <div class="email-popup-badge" id="epBadge">🎁 Exclusief aanbod</div>
+      <h3 id="epTitle">Ontvang <span class="hl">10% korting</span> op je eerste bestelling</h3>
+      <p id="epSubtitle">Vul je e-mailadres in en ontvang direct een kortingscode. Geen spam, uitschrijven kan altijd.</p>
+      <div class="email-inp-wrap">
+        <input class="email-inp" type="email" id="emailInput" placeholder="jouw@email.nl" autocomplete="email">
+        <button class="btn-full" onclick="submitEmailPopup()" id="epSubmitBtn">
+          <span id="epSubmitTxt">Stuur mij de kortingscode →</span>
+        </button>
+      </div>
+      <div class="ep-trust">
+        <span>🔒 Geen spam</span>
+        <span>✉️ Direct in je inbox</span>
+        <span>🚫 Uitschrijven kan altijd</span>
+      </div>
+      <span class="email-popup-skip" onclick="closeEmailPopup()" id="epSkip">Nee bedankt, ik betaal liever de volle prijs</span>
+    </div>
+    <div class="email-popup-success" id="emailPopupSuccess">
+      <span class="check">🎉</span>
+      <h4 id="epSuccessTitle">Jouw kortingscode:</h4>
+      <div class="email-popup-coupon" id="epCoupon">WELKOM10</div>
+      <p id="epSuccessMsg">Gebruik deze code bij je bestelling. De code is 24 uur geldig.</p>
+      <button class="btn-full" style="margin-top:16px" onclick="closeEmailAndGoShop()">
+        <span id="epGoShop">Bekijk pakketten met korting ⚡</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= UPSELL MODAL ======= -->
+<div class="upsell-overlay" id="upsellOverlay">
+  <div class="upsell-box">
+    <button class="upsell-close" onclick="closeUpsell()">×</button>
+    <div class="upsell-tag">⚡ Eenmalig aanbod</div>
+    <h3 id="upsellTitle">Klanten die dit kochten, voegden ook toe:</h3>
+    <p id="upsellSub">Combineer je pakket voor maximaal resultaat. Speciale prijs — alleen nu direct na bestelling.</p>
+    <div class="upsell-timer" id="upsellTimerRow">⏰ Dit aanbod vervalt over: <strong id="upsellTimer">09:59</strong></div>
+    <div class="upsell-cards" id="upsellCards"></div>
+    <button class="btn-full" id="upsellAddBtn" onclick="addUpsell()" style="opacity:0.5;pointer-events:none">
+      <span id="upsellAddTxt">Selecteer een pakket hierboven</span>
+    </button>
+    <span class="upsell-skip" onclick="closeUpsell()" id="upsellSkipTxt">Nee bedankt, ik ga zonder extra boost verder</span>
+  </div>
+</div>
+
 </body>
 </html>
