@@ -1,7 +1,27 @@
 const { createMollieClient } = require('@mollie/api-client');
-const nodemailer = require('nodemailer');
 
 const mollie = createMollieClient({ apiKey: process.env.MOLLIE_API_KEY });
+
+// Microsoft heeft basic authentication voor Outlook/Hotmail uitgezet (april 2026),
+// daarom verloopt verzending via Resend in plaats van nodemailer/SMTP.
+const AFZENDER  = process.env.MAIL_FROM || 'BoostSocials <orders@boostsocials.nl>';
+const NOTIFY_TO = process.env.MAIL_TO   || 'mrstekelenburg@hotmail.com';
+
+async function stuurMail({ to, subject, html }) {
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ from: AFZENDER, to: [to], subject, html }),
+  });
+  if (!r.ok) {
+    const tekst = await r.text();
+    throw new Error(`Resend ${r.status}: ${tekst}`);
+  }
+  return r.json();
+}
 
 // Mollie kan dezelfde webhook meerdere keren aanroepen (retries, statuswijzigingen).
 // Deze set voorkomt dubbele mails binnen dezelfde warme lambda-instantie.
@@ -68,18 +88,9 @@ module.exports = async (req, res) => {
   const bedrag = `€${Number(payment.amount.value).toFixed(2).replace('.', ',')}`;
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: 'hotmail',
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
-
     // ── MAIL 1: Notificatie naar jou ──
-    await transporter.sendMail({
-      from: `"BoostSocials" <${process.env.MAIL_USER}>`,
-      to: 'mrstekelenburg@hotmail.com',
+    await stuurMail({
+      to: NOTIFY_TO,
       subject: `Nieuwe bestelling: @${meta.username || '?'} — ${meta.pakket || '?'}`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;background:#f9f9f9;padding:24px;border-radius:12px">
@@ -105,8 +116,7 @@ module.exports = async (req, res) => {
 
     // ── MAIL 2: Bevestiging naar klant ──
     if (customerEmail) {
-      await transporter.sendMail({
-        from: `"BoostSocials" <${process.env.MAIL_USER}>`,
+      await stuurMail({
         to: customerEmail,
         subject: `Bevestiging jouw bestelling bij BoostSocials ✓`,
         html: `
@@ -128,7 +138,7 @@ module.exports = async (req, res) => {
                   <tr><td style="padding:8px 0;color:#666">Betaald</td><td style="padding:8px 0;font-weight:700;color:#FF2D78;text-align:right">${bedrag}</td></tr>
                 </table>
               </div>
-              <p style="font-size:14px;color:#666;line-height:1.6">Vragen? Mail naar <a href="mailto:${process.env.MAIL_USER}" style="color:#FF2D78">${process.env.MAIL_USER}</a> en vermeld je ordernummer.</p>
+              <p style="font-size:14px;color:#666;line-height:1.6">Vragen? Mail naar <a href="mailto:${process.env.MAIL_SUPPORT || 'support@boostsocials.nl'}" style="color:#FF2D78">${process.env.MAIL_SUPPORT || 'support@boostsocials.nl'}</a> en vermeld je ordernummer.</p>
               <p style="font-size:14px;color:#666;margin-bottom:0">Met vriendelijke groet,<br><strong>Team BoostSocials</strong></p>
             </div>
             <div style="background:#f5f5f5;padding:16px 24px;text-align:center;font-size:12px;color:#aaa">
