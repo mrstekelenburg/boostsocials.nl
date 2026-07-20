@@ -122,8 +122,21 @@ const label = (id, fallback) => LABELS[id] || UPSELL_LABELS[id] || fallback || i
 // Mollie verwacht een bedrag als string met exact 2 decimalen: "9.99"
 const toAmount = (cents) => (cents / 100).toFixed(2);
 
+// Bepaalt de basis-URL en maakt hem ongevoelig voor invoerfouten:
+// slash op het eind, ontbrekend https://, of een lege env-variabele.
+function baseUrl(req) {
+  let base = (process.env.SITE_URL || '').trim();
+  if (!base) {
+    // Terugval op het domein waar het verzoek vandaan komt
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    base = host ? `https://${host}` : '';
+  }
+  if (base && !/^https?:\/\//i.test(base)) base = 'https://' + base;
+  return base.replace(/\/+$/, ''); // slashes aan het eind eraf
+}
+
 module.exports = async (req, res) => {
-  const origin = process.env.SITE_URL || '';
+  const origin = baseUrl(req);
   res.setHeader('Access-Control-Allow-Origin', origin || '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -156,6 +169,11 @@ module.exports = async (req, res) => {
     omschrijving += ' + ' + upsellLabel;
   }
 
+  if (!/^https:\/\/[^\/]+\./.test(origin)) {
+    console.error('Ongeldige basis-URL:', JSON.stringify(origin), '| SITE_URL =', JSON.stringify(process.env.SITE_URL));
+    return res.status(500).json({ error: 'Serverconfiguratie: SITE_URL ontbreekt of is ongeldig' });
+  }
+
   const orderRef = 'BS-' + Date.now().toString(36).toUpperCase();
 
   try {
@@ -164,9 +182,9 @@ module.exports = async (req, res) => {
       // Deze omschrijving verschijnt op het bankafschrift van de klant.
       // Kort houden: Mollie kapt lange omschrijvingen af.
       description: `BoostSocials ${orderRef}`,
-      redirectUrl: `${process.env.SITE_URL}/succes.html?username=${encodeURIComponent(username)}&pakket=${encodeURIComponent(omschrijving)}&value=${toAmount(cents)}&order=${orderRef}`,
-      cancelUrl: `${process.env.SITE_URL}/?cancelled=true`,
-      webhookUrl: `${process.env.SITE_URL}/api/webhook`,
+      redirectUrl: `${origin}/succes.html?username=${encodeURIComponent(username)}&pakket=${encodeURIComponent(omschrijving)}&value=${toAmount(cents)}&order=${orderRef}`,
+      cancelUrl: `${origin}/?cancelled=true`,
+      webhookUrl: `${origin}/api/webhook`,
       locale: 'nl_NL',
       metadata: {
         order_ref: orderRef,
