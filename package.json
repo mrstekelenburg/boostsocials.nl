@@ -1,0 +1,8 @@
+{
+  "name": "boostsocials-website",
+  "version": "2.0.0",
+  "dependencies": {
+    "@mollie/api-client": "^4.3.3",
+    "nodemailer": "^6.9.0"
+  }
+}
